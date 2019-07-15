@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from './../../model/task'
+import { DataService } from './../../service/data.service'
 
 @Component({
   selector: 'app-view',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewComponent implements OnInit {
 
-  constructor() { }
+  tasks: Task[];
+  constructor(private dataservice:DataService) { }
 
   ngOnInit() {
+    this.getTasks();
+  }
+
+  getTasks() {
+    this.dataservice.getTasks().
+      subscribe(data => this.tasks = data);
   }
 
 }
