@@ -1,1 +1,12 @@
-<p>view works!</p>
+<div>
+    <table>
+        <tr>        
+            <thead>ID</thead>
+            <thead>Task Name</thead>
+        </tr>
+        <tr *ngfor="let t of tasks">
+            <td>{{t.id}}</td>
+            <td>{{t.name}}</td>
+        </tr>
+    </table>
+</div>
