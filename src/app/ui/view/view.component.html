@@ -1,12 +1,30 @@
 <div>
+        <div class="jumbotron">
+                <input [(ngModel)]="taskName" type="text" 
+                placeholder="Provide Task Name" class="form-control">
+                <input [(ngModel)]="parentTaskName" type="text" 
+                placeholder="Provide Parent Task Name" class="form-control">
+        </div>
     <table>
-        <tr>        
-            <thead>ID</thead>
-            <thead>Task Name</thead>
+        <tr>
+            <th>Task</th>
+            <th>Parent</th>
+            <th>Priority</th>
+            <th>Start Date</th>
+            <th>End Date</th>
         </tr>
-        <tr *ngfor="let t of tasks">
-            <td>{{t.id}}</td>
+        <tr *ngFor="let t of tasks | search : taskName : parentTaskName">
             <td>{{t.name}}</td>
+            <td><div *ngIf="t.parent">{{t.parent.name}}</div></td>
+            <td>{{t.priority}}</td>
+            <td>{{t.startDate | date:'dd/MM/yyyy'}}</td>
+            <td>{{t.endDate | date:'dd/MM/yyyy'}}</td>
         </tr>
     </table>
+    <section name="taskview">
+        <div *ngFor="let task of tasks">
+            <div>{{ task.name }}</div>
+        </div>
+        <hr>
+    </section>
 </div>

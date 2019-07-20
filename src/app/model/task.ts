@@ -1,11 +1,11 @@
 export class Task {
     id: number;
     name: string;
-    // parent: Task;
-    // startDate: Date;
-    // endDate: Date;
-    // status: string;
-    // priority: number;
+    parent: Task;
+    startDate: Date;
+    endDate: Date;
+    status: string;
+    priority: number;
 
     // /**
     //  *

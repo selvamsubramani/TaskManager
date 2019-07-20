@@ -10,6 +10,9 @@ import { DataService } from './../../service/data.service'
 export class ViewComponent implements OnInit {
 
   tasks: Task[];
+  taskName: string;
+  parentTaskName: string;
+
   constructor(private dataservice:DataService) { }
 
   ngOnInit() {
