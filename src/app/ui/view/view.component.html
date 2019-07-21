@@ -3,60 +3,65 @@
         <div class="card-body">
             <div class="input-group mb-2">
                 <div class="col-6 col-md-6 col-sm-6">
-                    <label class="mt-2 mr-2" for="taskname">Task:</label>
+                    <h6>Task:</h6>
                     <input id="taskname" [(ngModel)]="taskName" type="text" 
                         placeholder="Task Name" class="form-control">
                 </div>
                 <div class="col-6 col-md-6 col-sm-6">
-                    <label class="ml-2 mt-2 mr-2" for="parenttaskname">Parent Task:</label>
+                    <h6>Parent Task:</h6>
                     <input id="parenttaskname" [(ngModel)]="parentTaskName" type="text" 
                         placeholder="Parent Task Name" class="form-control">
                 </div>
             </div>
             <div class="input-group">
                 <div class="col-3 col-md-3 col-sm-3">
-                    <label class="mt-2 mr-2" for="frompriority">Priority From:</label>
+                    <h6>Priority From:</h6>
                     <input id="frompriority" [(ngModel)]="priorityFrom" type="number" 
                         placeholder="Priority" class="form-control"
                         min="0" max="30">
                 </div>
 
                 <div class="col-3 col-md-3 col-sm-3">
-                    <label class="ml-2 mt-2 mr-2" for="topriority">Priority To:</label>
+                    <h6>Priority To:</h6>
                     <input id="topriority" [(ngModel)]="priorityTo" type="number" 
                         placeholder="Priority" class="form-control"
                         min="0" max="30">
                 </div>
 
                 <div class="col-3 col-md-3 col-sm-3">
-                    <label class="ml-2 mt-2 mr-2" for="fromdate">Start Date:</label>
+                    <h6>Start Date:</h6>
                     <input id="fromdate" [(ngModel)]="startDate" type="date" 
                         placeholder="Start Date" class="form-control">
                 </div>
 
                 <div class="col-3 col-md-3 col-sm-3">
-                    <label class="ml-2 mt-2 mr-2" for="enddate">End Date:</label>
+                    <h6>End Date:</h6>
                     <input id="enddate" [(ngModel)]="endDate" type="date" 
                         placeholder="End Date" class="form-control">
                 </div>
             </div>
         </div>
     </section>
-    <section name="view" class="card mt-3">
+    <section name="view" class="mt-3">
         <div class="table">
             <div class="card" *ngFor="let t of tasks | search : taskName : parentTaskName : priorityFrom : priorityTo : startDate : endDate">
-                <div class="row">
+                <div class="row p-1">
                     <div class="ml-2 col-2 col-md-2 col-sm-2">
                         <h6>Task</h6>
-                        {{ t.name }}
+                        <div class="rounded bg-secondary p-2 text-light text-center">{{ t.name }}</div>                        
                     </div>
                     <div class="col-2 col-md-2 col-sm-2">
                         <h6>Parent Task</h6>
-                        <div *ngIf="t.parent">{{t.parent.name}}</div>
+                        <div class="rounded bg-secondary p-2 text-light text-center" *ngIf="t.parent; else noparent">{{t.parent.name}}</div>
+                        <ng-template #noparent>
+                            <div class="rounded bg-secondary p-2 text-light text-center">
+                                NO Parent
+                            </div>
+                        </ng-template>
                     </div>
                     <div class="mr-5">
                         <h6>Priority</h6>
-                        {{ t.priority }}
+                        <span class="badge badge-pill badge-info text-center">{{ t.priority }}</span>                        
                     </div>
                     <div class="mr-4">
                         <h6>Start Date</h6>
@@ -67,16 +72,16 @@
                         {{t.endDate | date:'dd/MM/yyyy'}}
                     </div>
                     <div class="mr-2">
-                        <input type="button" value="Edit Task" class="mt-2 btn btn-primary">
+                        <input type="button" value="Edit Task" class="mt-3 btn btn-primary">
                     </div>
                     <div class="mr-2">
-                        <input type="button" value="End Task" class="mt-2 btn btn-success">
+                        <input type="button" value="End Task" class="mt-3 btn btn-success">
                     </div>
                     <div class="mr-2">
-                        <input type="button" value="Delete Task" class="mt-2 btn btn-danger">
+                        <input type="button" value="Delete Task" class="mt-3 btn btn-danger">
                     </div>
                 </div>
             </div>
         </div>
-    </section>   
+    </section>
 </div>

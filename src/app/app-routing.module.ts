@@ -6,6 +6,7 @@ import { ViewComponent } from './ui/view/view.component';
 import { EditComponent } from './ui/edit/edit.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: "/", pathMatch: 'full' },
   { path: 'add', component: AddComponent },
   { path: 'edit', component: EditComponent },
   { path: 'view', component: ViewComponent }
