@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../../model/task';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-edit',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditComponent implements OnInit {
 
-  constructor() { }
+  task: Task;
+  parentTasks: Task[];
+  
+  constructor(private dataservice:DataService) { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+    this.task = new Task();
+    this.parentTasks = new Array();
   }
+  updateTask()
+  {
+    
+  }
+  cancel()
+  {
 
+  }
 }

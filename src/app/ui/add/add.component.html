@@ -1,1 +1,67 @@
-<p>add works!</p>
+<div class="container mt-2">
+    <section name="addtask" class="card">
+        <div class="card-header">
+            <h4 class="card-title">Add Task</h4>
+        </div>
+
+        <div class="card-body">
+
+            <div class="mb-2 input-group">
+                <h6 class="col-1 col-md-2 col-sm-3 mt-2">Task: </h6>
+                <input type="text" class="form-control col-5 col-md-6 col-sm-6" 
+                    placeholder="Provide Task Name" required 
+                    [(ngModel)]="task.name" #taskname="ngModel">
+                <div *ngIf="taskname.invalid && (taskname.dirty || taskname.touched)"
+                    class="alert alert-danger p-1 ml-1">
+                    Task name is required.
+                </div>
+            </div>
+
+            <div class="mb-2 input-group">
+                <h6 class="col-1 col-md-2 col-sm-3">Priority: </h6>
+                <input type="range" class="form-control custom-range col-5 col-md-6 col-sm-6" 
+                    min="0" max="30" value="0" step="1">
+            </div>
+
+            <div class="mb-2 input-group">
+                <h6 class="col-1 col-md-2 col-sm-3 mt-2">Parent Task: </h6>
+                <select class="form-control col-5 col-md-6 col-sm-6" [(ngModel)]="task.parent">
+                    <option *ngFor="let parenttask of parentTasks" [ngValue]="parenttask">
+                        {{ parenttask.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-2 input-group">
+                <h6 class="col-1 col-md-2 col-sm-3 mt-2">Start Date: </h6>
+                <input type="date" class="form-control col-5 col-md-6 col-sm-6" 
+                    placeholder="Provide Start Date" required 
+                    [(ngModel)]="task.startDate" #startdate="ngModel">
+                <div *ngIf="startdate.invalid && (startdate.dirty || startdate.touched)"
+                    class="alert alert-danger p-1 ml-1">
+                    Start Date is required.
+                </div>
+            </div>
+
+            <div class="mb-2 input-group">
+                <h6 class="col-1 col-md-2 col-sm-3 mt-2">End Date: </h6>
+                <input type="date" class="form-control col-5 col-md-6 col-sm-6" 
+                    placeholder="Provide End Date" required 
+                    [(ngModel)]="task.endDate" #enddate="ngModel">
+                <div *ngIf="enddate.invalid && (enddate.dirty || enddate.touched)"
+                    class="alert alert-danger p-1 ml-1">
+                    End Date is required.
+                </div>
+            </div>
+
+            <div class="input-group">
+                <span class="col-1 col-md-2 col-sm-3"></span>
+                <input type="button" value="Add Task" 
+                    class="btn btn-success" (click)="addTask()"
+                    [disabled]="taskname.invalid || startdate.invalid || enddate.invalid">
+                <input type="button" value="Reset"
+                    class="ml-2 btn btn-primary" (click)="reset()">
+            </div>
+        </div>
+    </section>
+</div>

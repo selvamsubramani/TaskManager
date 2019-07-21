@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Task } from '../../model/task';
+import { DataService } from '../../service/data.service';
 
 @Component({
   selector: 'app-add',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddComponent implements OnInit {
 
-  constructor() { }
+  task: Task;
+  parentTasks: Task[];
 
-  ngOnInit() {
+  constructor(private dataservice:DataService) { }
+
+  ngOnInit() 
+  {
+    this.reset();
+    this.parentTasks = new Array();
+  }
+
+  addTask()
+  {
+
+  }
+
+  reset()
+  {
+    this.task = new Task();
   }
 
 }
