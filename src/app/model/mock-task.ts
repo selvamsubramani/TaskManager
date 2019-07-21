@@ -14,7 +14,7 @@ export const Tasks: Task[] =
     },
     { id: 2, name: 'Task-02'
     , startDate: new Date(2019,0,1), endDate: new Date(2099,11,31)
-    , priority:5, status: 'open'
+    , priority:10, status: 'open'
     , parent: {
         id: 0, name: 'Parent-Task-01'
         , startDate: new Date(2019,0,1), endDate: new Date(2099,11,31)
@@ -24,6 +24,6 @@ export const Tasks: Task[] =
     },
     { id: 3, name: 'Task-03'
     , startDate: new Date(2019,0,1), endDate: new Date(2099,11,31)
-    , priority:5, status: 'open'
+    , priority:15, status: 'open'
     , parent: null },
 ];

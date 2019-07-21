@@ -10,8 +10,13 @@ import { DataService } from './../../service/data.service'
 export class ViewComponent implements OnInit {
 
   tasks: Task[];
+
   taskName: string;
   parentTaskName: string;
+  priorityFrom: number;
+  priorityTo: number;
+  startDate: Date;
+  endDate: Date;
 
   constructor(private dataservice:DataService) { }
 
