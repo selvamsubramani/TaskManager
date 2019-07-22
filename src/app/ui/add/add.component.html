@@ -20,7 +20,7 @@
             <div class="mb-2 input-group">
                 <h6 class="col-1 col-md-2 col-sm-3">Priority: </h6>
                 <input type="range" class="form-control custom-range col-5 col-md-6 col-sm-6" 
-                    min="0" max="30" value="0" step="1">
+                    [(ngModel)]="task.priority" min="0" max="30" value="0" step="1">
             </div>
 
             <div class="mb-2 input-group">

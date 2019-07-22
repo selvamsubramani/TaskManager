@@ -29,4 +29,14 @@ export class ViewComponent implements OnInit {
       subscribe(data => this.tasks = data);
   }
 
+  endTask(id: number)
+  {
+    this.dataservice.endTask(id);
+  }
+
+  deleteTask(id: number)
+  {
+    this.dataservice.deleteTask(id);
+  }
+
 }

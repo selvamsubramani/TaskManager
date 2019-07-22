@@ -17,17 +17,18 @@ export class AddComponent implements OnInit {
   ngOnInit() 
   {
     this.reset();
-    this.parentTasks = new Array();
+    this.dataservice.getTasks()
+      .subscribe(data => this.parentTasks = data);
   }
 
   addTask()
-  {
-
+  {    
+    this.dataservice.addTask(this.task);
   }
 
   reset()
   {
-    this.task = new Task();
+    this.task = new Task();    
   }
 
 }
