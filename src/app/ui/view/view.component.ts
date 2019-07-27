@@ -26,7 +26,9 @@ export class ViewComponent implements OnInit {
 
   getTasks() {
     this.dataservice.getTasks().
-      subscribe(data => this.tasks = data);
+      subscribe(
+        data => this.tasks = data,
+        error => console.log(error));
   }
 
   endTask(id: number)

@@ -48,11 +48,11 @@
                 <div class="row p-1">
                     <div class="ml-2 col-2 col-md-2 col-sm-2">
                         <h6>Task</h6>
-                        <div class="rounded bg-secondary p-2 text-light text-center">{{ task.name }}</div>                        
+                        <div class="rounded bg-secondary p-2 text-light text-center">{{ task.Name }}</div>                        
                     </div>
                     <div class="col-2 col-md-2 col-sm-2">
                         <h6>Parent Task</h6>
-                        <div class="rounded bg-secondary p-2 text-light text-center" *ngIf="task.parent; else noparent">{{task.parent.name}}</div>
+                        <div class="rounded bg-secondary p-2 text-light text-center" *ngIf="task.Parent; else noparent">{{task.Parent.Name}}</div>
                         <ng-template #noparent>
                             <div class="rounded bg-secondary p-2 text-light text-center">
                                 NO Parent
@@ -61,27 +61,29 @@
                     </div>
                     <div class="mr-5">
                         <h6>Priority</h6>
-                        <span class="badge badge-pill badge-info text-center">{{ task.priority }}</span>                        
+                        <span class="badge badge-pill badge-info text-center">{{ task.Priority }}</span>                        
                     </div>
                     <div class="mr-4">
                         <h6>Start Date</h6>
-                        {{task.startDate | date:'dd/MM/yyyy'}}
+                        {{ task.StartDate | date:'dd/MM/yyyy' }}
                     </div>
                     <div class="mr-4">
                         <h6>End Date</h6>
-                        {{task.endDate | date:'dd/MM/yyyy'}}
+                        {{ task.EndDate | date:'dd/MM/yyyy' }}
                     </div>
                     <div class="mr-2">
-                        <input type="button" value="Edit Task" 
+                        <input type="button" value="Edit Task"
+                            [disabled]="task.Status==true"
                             class="mt-3 btn btn-primary">
                     </div>
                     <div class="mr-2">
-                        <input type="button" value="End Task" 
-                            class="mt-3 btn btn-success" (click)="endTask(task.id)">
+                        <input type="button" value="End Task"
+                            [disabled]="task.Status==true"
+                            class="mt-3 btn btn-success" (click)="endTask(task.Id)">
                     </div>
                     <div class="mr-2">
                         <input type="button" value="Delete Task" 
-                            class="mt-3 btn btn-danger" (click)="deleteTask(task.id)">
+                            class="mt-3 btn btn-danger" (click)="deleteTask(task.Id)">
                     </div>
                 </div>
             </div>

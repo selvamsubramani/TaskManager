@@ -14,12 +14,13 @@ export class SearchPipe implements PipeTransform {
       return tasks.filter(
         task => 
         {
-          return (!taskname || (task.name.toLowerCase().indexOf(taskname.toLowerCase()) > -1))
-          && (!parenttaskname || (task.parent && task.parent.name.toLowerCase().indexOf(parenttaskname.toLowerCase()) > -1))
-          && (!frompriority || (task.priority >= frompriority))
-          && (!topriority || (task.priority <= topriority))
-          && (!startdate || (task.startDate >= new Date(startdate)))
-          && (!enddate || (task.endDate <= new Date(enddate)));
+          //debugger;
+          return (!taskname || (task.Name.toLowerCase().indexOf(taskname.toLowerCase()) > -1))
+          && (!parenttaskname || (task.Parent && task.Parent.Name.toLowerCase().indexOf(parenttaskname.toLowerCase()) > -1))
+          && (!frompriority || (task.Priority >= frompriority))
+          && (!topriority || (task.Priority <= topriority))
+          && (!startdate || (task.StartDate >= new Date(startdate)))
+          && (!enddate || (task.EndDate <= new Date(enddate)));
         }
       )
     }

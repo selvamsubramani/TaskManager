@@ -29,6 +29,7 @@ export class AddComponent implements OnInit {
   reset()
   {
     this.task = new Task();    
+    this.task.Priority = 0;
   }
 
 }

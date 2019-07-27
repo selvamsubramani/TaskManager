@@ -8,13 +8,15 @@
 
             <div class="mb-2 input-group">
                 <h6 class="col-1 col-md-2 col-sm-3 mt-2">Task: </h6>
-                <input type="text" class="form-control col-5 col-md-6 col-sm-6" 
-                    placeholder="Provide Task Name" required 
-                    [(ngModel)]="task.name" #taskname="ngModel">
-                <div *ngIf="taskname.invalid && (taskname.dirty || taskname.touched)"
-                    class="alert alert-danger p-1 ml-1">
-                    Task name is required.
-                </div>
+                <input type="text" class="form-control col-5 col-md-6 col-sm-6 rounded" 
+                    placeholder="Provide Task Name" required                    
+                    [(ngModel)]="task.name" #taskname="ngModel"
+                    [class.is-invalid]="taskname.invalid && taskname.touched"
+                    [class.is-valid]="taskname.valid">
+                <small [class.d-none]="taskname.valid || taskname.untouched" 
+                    class="text-danger ml-2 mt-2">
+                    Task name is required
+                </small>
             </div>
 
             <div class="mb-2 input-group">
@@ -34,24 +36,28 @@
 
             <div class="mb-2 input-group">
                 <h6 class="col-1 col-md-2 col-sm-3 mt-2">Start Date: </h6>
-                <input type="date" class="form-control col-5 col-md-6 col-sm-6" 
-                    placeholder="Provide Start Date" required 
-                    [(ngModel)]="task.startDate" #startdate="ngModel">
-                <div *ngIf="startdate.invalid && (startdate.dirty || startdate.touched)"
-                    class="alert alert-danger p-1 ml-1">
-                    Start Date is required.
-                </div>
+                <input type="date" class="form-control col-5 col-md-6 col-sm-6 rounded" 
+                    placeholder="Provide Start Date" required                    
+                    [(ngModel)]="task.startDate" #startdate="ngModel"
+                    [class.is-invalid]="startdate.invalid && startdate.touched"
+                    [class.is-valid]="startdate.valid">
+                <small [class.d-none]="startdate.valid || startdate.untouched" 
+                    class="text-danger ml-2 mt-2">
+                    Start Date is required
+                </small>
             </div>
 
             <div class="mb-2 input-group">
                 <h6 class="col-1 col-md-2 col-sm-3 mt-2">End Date: </h6>
-                <input type="date" class="form-control col-5 col-md-6 col-sm-6" 
+                <input type="date" class="form-control col-5 col-md-6 col-sm-6 rounded" 
                     placeholder="Provide End Date" required 
-                    [(ngModel)]="task.endDate" #enddate="ngModel">
-                <div *ngIf="enddate.invalid && (enddate.dirty || enddate.touched)"
-                    class="alert alert-danger p-1 ml-1">
-                    End Date is required.
-                </div>
+                    [(ngModel)]="task.endDate" #enddate="ngModel"
+                    [class.is-invalid]="enddate.invalid && enddate.touched"
+                    [class.is-valid]="enddate.valid">
+                <small [class.d-none]="enddate.valid || enddate.untouched" 
+                    class="text-danger ml-2 mt-2">
+                    End Date is required
+                </small>
             </div>
 
             <div class="input-group">
