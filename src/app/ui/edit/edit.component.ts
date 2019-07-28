@@ -7,24 +7,28 @@ import { DataService } from '../../service/data.service';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
+
 export class EditComponent implements OnInit {
 
   task: Task;
   parentTasks: Task[];
-  
-  constructor(private dataservice:DataService) { }
 
-  ngOnInit() 
-  {
-    this.task = new Task();
-    this.parentTasks = new Array();
+  constructor(private dataservice: DataService) { }
+
+  ngOnInit() {
+    this.dataservice.getTaskById(2).subscribe(
+      data => this.task = data,
+      error => console.log(error));
+    this.dataservice.getTasks().subscribe(
+      data => this.parentTasks = data,
+      error => console.log(error));
+      debugger;
   }
-  updateTask()
-  {
-    
+
+  updateTask() {
+debugger;
   }
-  cancel()
-  {
+  cancel() {
 
   }
 }

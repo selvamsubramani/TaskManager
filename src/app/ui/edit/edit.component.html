@@ -1,74 +1,76 @@
 <div class="container mt-2">
-        <section name="addtask" class="card">
-            <div class="card-header">
-                <h4 class="card-title">Edit Task</h4>
-            </div>
-    
-            <div class="card-body">
-    
+    <section name="addtask" class="card">
+        <div class="card-header">
+            <h4 class="card-title">Edit Task</h4>
+        </div>
+
+        <div class="card-body">
+            <form #f="ngForm">
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">Task: </h6>
-                    <input type="text" class="form-control col-5 col-md-6 col-sm-6 rounded" 
-                        placeholder="Provide Task Name" required                    
-                        [(ngModel)]="task.name" #taskname="ngModel"
-                        [class.is-invalid]="taskname.invalid && taskname.touched"
-                        [class.is-valid]="taskname.valid">
-                    <small [class.d-none]="taskname.valid || taskname.untouched" 
-                        class="text-danger ml-2 mt-2">
+                    <input type="text" name="taskname" class="form-control col-4 col-md-5 col-sm-6 rounded" placeholder="Provide Task Name" required
+                        [(ngModel)]="task.Name" #taskname="ngModel" [class.is-invalid]="taskname.invalid && taskname.touched"
+                        [class.is-valid]="taskname.valid && taskname.touched">
+                    <small [class.d-none]="taskname.valid || taskname.untouched" class="text-danger ml-2 mt-2">
                         Task name is required
                     </small>
                 </div>
-    
+
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3">Priority: </h6>
-                    <input type="range" class="form-control custom-range col-5 col-md-6 col-sm-6" 
-                        [(ngModel)]="task.priority" min="0" max="30" value="0" step="1">
+                    <input type="range" name="priority" class="form-control custom-range col-4 col-md-5 col-sm-6" [(ngModel)]="task.Priority"
+                        min="0" max="30" value="0" step="1">
                 </div>
-    
+
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">Parent Task: </h6>
-                    <select class="form-control col-5 col-md-6 col-sm-6" [(ngModel)]="task.parent">
-                        <option *ngFor="let parenttask of parentTasks" [ngValue]="parenttask">
-                            {{ parenttask.name }}
+                    <select name="parent" class="form-control col-4 col-md-5 col-sm-6" [(ngModel)]="task.Parent.Id">
+                        <option *ngFor="let parenttask of parentTasks" [ngValue]="parenttask.Id">
+                            {{ parenttask.Name }}
                         </option>
                     </select>
                 </div>
-    
+
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">Start Date: </h6>
-                    <input type="date" class="form-control col-5 col-md-6 col-sm-6 rounded" 
-                        placeholder="Provide Start Date" required                    
-                        [(ngModel)]="task.startDate" #startdate="ngModel"
-                        [class.is-invalid]="startdate.invalid && startdate.touched"
-                        [class.is-valid]="startdate.valid"
-                        [max]="task.endDate">
-                    <small [class.d-none]="startdate.valid || startdate.untouched" 
-                        class="text-danger ml-2 mt-2">
-                        Start Date is required
-                    </small>
+                    <input type="date" class="form-control col-4 col-md-5 col-sm-6 rounded" placeholder="Provide Start Date" name="startdate"
+                        [ngModel]="task.StartDate | date: 'yyyy-MM-dd'" (ngModelChange)="task.StartDate = $event" #startdate="ngModel"
+                        [class.is-invalid]="startdate.invalid && startdate.touched" [class.is-valid]="startdate.valid && startdate.touched"
+                        appStartdateValidator>
+                    <div class="text-danger ml-2 mt-2" *ngIf="startdate.invalid && startdate.touched">
+                        <small *ngIf="startdate.errors['required']">
+                            Start Date is required
+                        </small>
+                        <small *ngIf="startdate.errors['invalid-start']">
+                            Start Date should be greater than or equal to Today
+                        </small>
+                    </div>
                 </div>
-    
+
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">End Date: </h6>
-                    <input type="date" class="form-control col-5 col-md-6 col-sm-6 rounded" 
-                        placeholder="Provide End Date" required 
-                        [(ngModel)]="task.endDate" #enddate="ngModel"
-                        [class.is-invalid]="enddate.invalid && enddate.touched"
-                        [class.is-valid]="enddate.valid">
-                    <small [class.d-none]="enddate.valid || enddate.untouched" 
-                        class="text-danger ml-2 mt-2">
-                        End Date is required
-                    </small>
+                    <input type="date" class="form-control col-4 col-md-5 col-sm-6 rounded" placeholder="Provide End Date" name="enddate" [ngModel]="task.EndDate | date: 'yyyy-MM-dd'"
+                        (ngModelChange)="task.EndDate = $event" #enddate="ngModel" [class.is-invalid]="enddate.invalid && enddate.touched"
+                        [class.is-valid]="enddate.valid && enddate.touched" appDateValidator="startdate">
+                    <div class="text-danger ml-2 mt-2" *ngIf="enddate.invalid && enddate.touched">
+                        <small *ngIf="enddate.errors['required']">
+                            End Date is required
+                        </small>
+                        <small *ngIf="enddate.errors['invalid-start']">
+                            End Date should be greater than or equal to Today/Start Date
+                        </small>
+                        <small *ngIf="enddate.errors['invalid-date']">
+                            End Date should be greater than or equal to Start Date
+                        </small>
+                    </div>
                 </div>
-    
+
                 <div class="input-group">
                     <span class="col-1 col-md-2 col-sm-3"></span>
-                    <input type="button" value="Update Task" 
-                        class="btn btn-success" (click)="updateTask()"
-                        [disabled]="taskname.invalid || startdate.invalid || enddate.invalid">
-                    <input type="button" value="Cancel"
-                        class="ml-2 btn btn-primary" (click)="cancel()">
+                    <input type="button" value="Update Task" class="btn btn-success" (click)="updateTask()" [disabled]="taskname.invalid || startdate.invalid || enddate.invalid">
+                    <input type="button" value="Cancel" class="ml-2 btn btn-primary" (click)="cancel()">
                 </div>
-            </div>
-        </section>
-    </div>
+            </form>
+        </div>
+    </section>
+</div>

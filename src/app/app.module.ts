@@ -6,12 +6,16 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchPipe } from './utility/search.pipe';
+import { DateValidatorDirective } from './utility/date-validator.directive';
+import { StartdateValidatorDirective } from './utility/startdate-validator.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoutingComponents,
-    SearchPipe
+    SearchPipe,
+    DateValidatorDirective,
+    StartdateValidatorDirective
   ],
   imports: [
     BrowserModule,

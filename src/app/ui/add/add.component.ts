@@ -12,24 +12,26 @@ export class AddComponent implements OnInit {
   task: Task;
   parentTasks: Task[];
 
-  constructor(private dataservice:DataService) { }
+  constructor(private dataservice: DataService) { }
 
-  ngOnInit() 
-  {
+  ngOnInit() {
     this.reset();
     this.dataservice.getTasks()
-      .subscribe(data => this.parentTasks = data);
+      .subscribe(
+        data => this.parentTasks = data,
+        error => console.log(error));
   }
 
-  addTask()
-  {    
+  addTask() {
     this.dataservice.addTask(this.task);
   }
 
-  reset()
-  {
-    this.task = new Task();    
+  reset() {
+    this.task = new Task();
+    this.task.StartDate = null;
+    this.task.EndDate = null;
     this.task.Priority = 0;
+    this.task.Parent = new Task();
   }
 
 }
