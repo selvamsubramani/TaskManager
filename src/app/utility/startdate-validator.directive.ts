@@ -13,11 +13,21 @@ import { Validator, NG_VALIDATORS, AbstractControl, ValidationErrors } from '@an
 export class StartdateValidatorDirective {
   validate(control: AbstractControl): ValidationErrors | null {
     if (control.value) {
-      if (new Date(control.value) < new Date()) {
+      if (this.getControlDate(control.value) < this.getCurrentDate()) {
         return { 'invalid-start': true };
       }
     }
     else
       return { 'required': true };
+  }
+
+  getCurrentDate() : Date {
+    const current = new Date();
+    return new Date(current.getFullYear(), current.getMonth(), current.getDate());
+  }
+
+  getControlDate(value: string) : Date{
+    const control = new Date(value);
+    return new Date(control.getFullYear(), control.getMonth(), control.getDate() + 1);
   }
 }

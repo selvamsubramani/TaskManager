@@ -18,7 +18,7 @@ export class ViewComponent implements OnInit {
   startDate: Date;
   endDate: Date;
 
-  constructor(private dataservice:DataService) { }
+  constructor(private dataservice: DataService) { }
 
   ngOnInit() {
     this.getTasks();
@@ -31,14 +31,16 @@ export class ViewComponent implements OnInit {
         error => console.log(error));
   }
 
-  endTask(id: number)
-  {
+  endTask(id: number) {
     this.dataservice.endTask(id);
   }
 
-  deleteTask(id: number)
-  {
+  deleteTask(id: number) {
     this.dataservice.deleteTask(id);
+  }
+
+  editTask(id: number) {    
+    this.dataservice.changeTask(id);
   }
 
 }

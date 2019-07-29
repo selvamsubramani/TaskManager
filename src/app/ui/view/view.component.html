@@ -73,8 +73,8 @@
                     </div>
                     <div class="mr-2">
                         <input type="button" value="Edit Task"
-                            [disabled]="task.Status==true"
-                            class="mt-3 btn btn-primary">
+                            [disabled]="task.Status==true" routerLink="/edit"
+                            class="mt-3 btn btn-primary" (click)="editTask(task.Id)">
                     </div>
                     <div class="mr-2">
                         <input type="button" value="End Task"
