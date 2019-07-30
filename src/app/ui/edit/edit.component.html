@@ -25,8 +25,10 @@
 
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">Parent Task: </h6>
-                    <select name="parent" class="form-control col-4 col-md-5 col-sm-6" [(ngModel)]="task.Parent.Id">
-                        <option *ngFor="let parenttask of parentTasks" [ngValue]="parenttask.Id">
+                    <select name="parent" class="form-control col-4 col-md-5 col-sm-6" [(ngModel)]="task.Parent"
+                        [compareWith]="compare">
+                        <option [ngValue]="defaultParent">Select any Parent Task</option>
+                        <option *ngFor="let parenttask of parentTasks" [ngValue]="parenttask">
                             {{ parenttask.Name }}
                         </option>
                     </select>

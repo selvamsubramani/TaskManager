@@ -21,6 +21,19 @@ export class DataService {
     return of(Tasks);
   }
 
+  getParentTasks(id: number = 0): Observable<Task[]> {
+    // API Call
+    //return this.http.get<Task[]>(this.API + "GetAllTasks"); - API Call
+    let parentTasks: Task[];
+    this.getTasks().subscribe(
+      data => {
+        parentTasks = data.filter(t => t.Id != id
+          && (!t.Parent || t.Parent.Id != id));
+      },
+      error => console.log(error));
+    return of(parentTasks);
+  }
+
   getTaskById(id: number): Observable<Task> {
     // API Call
     // this.http.get<Task>(this.API + "GetTaskByTaskId" + id);

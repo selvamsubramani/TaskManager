@@ -6,7 +6,7 @@ export const Tasks: Task[] =
             Id: 1, Name: 'Task-01'
             , StartDate: new Date(2019, 0, 1), EndDate: new Date(2099, 11, 31)
             , Priority: 5, Status: false
-            , Parent: null
+            , Parent: undefined
         },
         {
             Id: 2, Name: 'Task-02'

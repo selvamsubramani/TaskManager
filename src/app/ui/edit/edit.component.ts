@@ -10,6 +10,7 @@ import { DataService } from '../../service/data.service';
 
 export class EditComponent implements OnInit {
 
+  defaultParent: Task;
   taskId: number;
   task: Task;
   parentTasks: Task[];
@@ -20,14 +21,13 @@ export class EditComponent implements OnInit {
     this.dataservice.currentTaskId.subscribe(
       data => {
         this.taskId = data;
-        console.log(this.taskId);
       }
     );
     if (this.taskId > 0) {
       this.dataservice.getTaskById(this.taskId).subscribe(
         data => this.task = data,
         error => console.log(error));
-      this.dataservice.getTasks().subscribe(
+      this.dataservice.getParentTasks(this.taskId).subscribe(
         data =>
           this.parentTasks = data,
         error => console.log(error));
@@ -37,8 +37,8 @@ export class EditComponent implements OnInit {
   updateTask() {
     this.dataservice.updateTask(this.task);
   }
-  
-  cancel() {
 
+  compare(t1: Task, t2: Task) {
+    return t1 && t2 ? t1.Id === t2.Id : t1 === t2;
   }
 }

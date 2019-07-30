@@ -8,8 +8,9 @@
             <form #f="ngForm">
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">Task: </h6>
-                    <input type="text" name="taskname" class="form-control col-4 col-md-5 col-sm-6 rounded" placeholder="Provide Task Name" required
-                        [(ngModel)]="task.Name" #taskname="ngModel" [class.is-invalid]="taskname.invalid && taskname.touched"
+                    <input type="text" name="taskname" class="form-control col-4 col-md-5 col-sm-6 rounded"
+                        placeholder="Provide Task Name" required [(ngModel)]="task.Name" #taskname="ngModel"
+                        [class.is-invalid]="taskname.invalid && taskname.touched"
                         [class.is-valid]="taskname.valid && taskname.touched">
                     <small [class.d-none]="taskname.valid || taskname.untouched" class="text-danger ml-2 mt-2">
                         Task name is required
@@ -18,14 +19,16 @@
 
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3">Priority: </h6>
-                    <input type="range" name="priority" class="form-control custom-range col-4 col-md-5 col-sm-6" [(ngModel)]="task.Priority"
-                        min="0" max="30" value="0" step="1">
+                    <input type="range" name="priority" class="form-control custom-range col-4 col-md-5 col-sm-6"
+                        [(ngModel)]="task.Priority" min="0" max="30" value="0" step="1">
                 </div>
 
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">Parent Task: </h6>
-                    <select name="parent" class="form-control col-4 col-md-5 col-sm-6" [(ngModel)]="task.Parent.Id">
-                        <option *ngFor="let parenttask of parentTasks" [ngValue]="parenttask.Id">
+                    <select name="parent" class="form-control col-4 col-md-5 col-sm-6" [(ngModel)]="task.Parent"
+                        [compareWith]="compare">
+                        <option [ngValue]="defaultParent">Select any Parent Task</option>
+                        <option *ngFor="let parenttask of parentTasks" [ngValue]="parenttask">
                             {{ parenttask.Name }}
                         </option>
                     </select>
@@ -33,10 +36,11 @@
 
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">Start Date: </h6>
-                    <input type="date" class="form-control col-4 col-md-5 col-sm-6 rounded" placeholder="Provide Start Date" name="startdate"
-                        [ngModel]="task.StartDate | date: 'yyyy-MM-dd'" (ngModelChange)="task.StartDate = $event" #startdate="ngModel"
-                        [class.is-invalid]="startdate.invalid && startdate.touched" [class.is-valid]="startdate.valid && startdate.touched"
-                        appStartdateValidator>
+                    <input type="date" class="form-control col-4 col-md-5 col-sm-6 rounded"
+                        placeholder="Provide Start Date" name="startdate"
+                        [ngModel]="task.StartDate | date: 'yyyy-MM-dd'" (ngModelChange)="task.StartDate = $event"
+                        #startdate="ngModel" [class.is-invalid]="startdate.invalid && startdate.touched"
+                        [class.is-valid]="startdate.valid && startdate.touched" appStartdateValidator>
                     <div class="text-danger ml-2 mt-2" *ngIf="startdate.invalid && startdate.touched">
                         <small *ngIf="startdate.errors['required']">
                             Start Date is required
@@ -49,8 +53,10 @@
 
                 <div class="mb-2 input-group">
                     <h6 class="col-1 col-md-2 col-sm-3 mt-2">End Date: </h6>
-                    <input type="date" class="form-control col-4 col-md-5 col-sm-6 rounded" placeholder="Provide End Date" name="enddate" [ngModel]="task.EndDate | date: 'yyyy-MM-dd'"
-                        (ngModelChange)="task.EndDate = $event" #enddate="ngModel" [class.is-invalid]="enddate.invalid && enddate.touched"
+                    <input type="date" class="form-control col-4 col-md-5 col-sm-6 rounded"
+                        placeholder="Provide End Date" name="enddate" [ngModel]="task.EndDate | date: 'yyyy-MM-dd'"
+                        (ngModelChange)="task.EndDate = $event" #enddate="ngModel"
+                        [class.is-invalid]="enddate.invalid && enddate.touched"
                         [class.is-valid]="enddate.valid && enddate.touched" appDateValidator="startdate">
                     <div class="text-danger ml-2 mt-2" *ngIf="enddate.invalid && enddate.touched">
                         <small *ngIf="enddate.errors['required']">
@@ -68,8 +74,9 @@
                 <div class="input-group">
                     <span class="col-1 col-md-2 col-sm-3"></span>
                     <input type="button" value="Add Task" class="btn btn-success" (click)="addTask()" routerLink="/view"
-                    [disabled]="taskname.invalid || startdate.invalid || enddate.invalid">
-                    <input type="button" value="Reset" class="ml-2 btn btn-primary" (click)="reset()">
+                        [disabled]="taskname.invalid || startdate.invalid || enddate.invalid">
+                    <input type="reset" class="ml-2 btn btn-primary">
+                    <!-- <input type="button" value="Reset" class="ml-2 btn btn-primary" (click)="reset()"> -->
                 </div>
             </form>
         </div>
