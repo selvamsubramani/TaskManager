@@ -8,6 +8,7 @@ import { DataService } from '../../service/data.service';
   styleUrls: ['./add.component.css']
 })
 export class AddComponent implements OnInit {
+
   defaultParent: Task;
   task: Task;
   parentTasks: Task[];
@@ -23,15 +24,11 @@ export class AddComponent implements OnInit {
   }
 
   addTask() {
-    let maxTaskId = Math.max.apply(Math, this.parentTasks.map(x => x.Id));
-    this.task.Id = maxTaskId + 1;
     this.dataservice.addTask(this.task);
   }
 
   reset() {
     this.task = new Task();
-    this.task.StartDate = null;
-    this.task.EndDate = null;
     this.task.Priority = 0;
   }
 

@@ -10,7 +10,7 @@ import { DataService } from '../../service/data.service';
 
 export class EditComponent implements OnInit {
 
-  defaultParent: Task;
+  defaultParent: Task = null;
   taskId: number;
   task: Task;
   parentTasks: Task[];
@@ -19,17 +19,15 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.dataservice.currentTaskId.subscribe(
-      data => {
-        this.taskId = data;
-      }
+      data => this.taskId = data,
+      error => console.log(error)
     );
     if (this.taskId > 0) {
       this.dataservice.getTaskById(this.taskId).subscribe(
         data => this.task = data,
         error => console.log(error));
       this.dataservice.getParentTasks(this.taskId).subscribe(
-        data =>
-          this.parentTasks = data,
+        data => this.parentTasks = data,
         error => console.log(error));
     }
   }

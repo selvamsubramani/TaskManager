@@ -73,10 +73,9 @@
 
                 <div class="input-group">
                     <span class="col-1 col-md-2 col-sm-3"></span>
-                    <input type="button" value="Add Task" class="btn btn-success" (click)="addTask()" routerLink="/view"
+                    <input type="button" value="Add Task" class="btn btn-success" (click)="addTask()"
                         [disabled]="taskname.invalid || startdate.invalid || enddate.invalid">
                     <input type="reset" class="ml-2 btn btn-primary">
-                    <!-- <input type="button" value="Reset" class="ml-2 btn btn-primary" (click)="reset()"> -->
                 </div>
             </form>
         </div>

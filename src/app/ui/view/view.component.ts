@@ -32,14 +32,26 @@ export class ViewComponent implements OnInit {
   }
 
   endTask(id: number) {
-    this.dataservice.endTask(id);
+    this.dataservice.endTask(id).
+      subscribe(
+        res => {
+          console.log(res);
+          this.ngOnInit();
+        },
+        error => console.log(error));
   }
 
   deleteTask(id: number) {
-    this.dataservice.deleteTask(id);
+    this.dataservice.deleteTask(id).
+      subscribe(
+        res => {
+          console.log(res);
+          this.ngOnInit();
+        },
+        error => console.log(error));
   }
 
-  editTask(id: number) {    
+  editTask(id: number) {
     this.dataservice.changeTask(id);
   }
 
