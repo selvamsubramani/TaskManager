@@ -18,7 +18,6 @@ export class DataService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getTasks(): Observable<Task[]> {
-    console.log(this.API);
     return this.http.get<Task[]>(this.API + "GetAllTasks");
   }
 

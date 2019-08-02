@@ -21,12 +21,12 @@ export class StartdateValidatorDirective {
       return { 'required': true };
   }
 
-  getCurrentDate() : Date {
+  getCurrentDate(): Date {
     const current = new Date();
     return new Date(current.getFullYear(), current.getMonth(), current.getDate());
   }
 
-  getControlDate(value: string) : Date{
+  getControlDate(value: string): Date {
     const control = new Date(value);
     return new Date(control.getFullYear(), control.getMonth(), control.getDate() + 1);
   }
