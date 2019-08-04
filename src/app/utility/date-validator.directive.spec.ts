@@ -7,17 +7,17 @@ import { By } from '@angular/platform-browser';
 
 describe('DateValidatorDirective', () => {
 
-@Component({
-  template:'<form #f="ngForm">'+
-  '<input type="date" name="startdate"' + 
-  '[(ngModel)]="StartDate" #startdate="ngModel">' +
-  '<input type="date" name="enddate"' + 
-  '[(ngModel)]="EndDate" #enddate="ngModel" appDateValidator="startdate">'
-})
-class TestComponent{
-  StartDate: string;
-  EndDate: string;
-}
+  @Component({
+    template: '<form #f="ngForm">' +
+      '<input type="date" name="startdate"' +
+      '[(ngModel)]="StartDate" #startdate="ngModel">' +
+      '<input type="date" name="enddate"' +
+      '[(ngModel)]="EndDate" #enddate="ngModel" appDateValidator="startdate">'
+  })
+  class TestComponent {
+    StartDate: string;
+    EndDate: string;
+  }
 
   let component: TestComponent;
   let fixture: ComponentFixture<TestComponent>;
@@ -29,7 +29,7 @@ class TestComponent{
           CommonModule
         ],
         declarations: [
-          TestComponent, 
+          TestComponent,
           DateValidatorDirective],
         providers: [
           { provide: ComponentFixtureAutoDetect, useValue: true }
@@ -53,11 +53,16 @@ class TestComponent{
     component.StartDate = "2019-07-01";
     component.EndDate = "2017-07-01";
     fixture.detectChanges();
-    const directive = new DateValidatorDirective();
+
+    const endDateControl = fixture.debugElement.query(By.css('[name=enddate]'));
+    expect(endDateControl).toBeTruthy();
 
     fixture.whenStable().then(() => {
+      const endDateControl = fixture.debugElement.query(By.css('[name=enddate]'));
+      endDateControl.nativeElement.value = "2019-07-01";
+      dispatchEvent(endDateControl.nativeElement);
+      let end = endDateControl.references['enddate'];
       fixture.detectChanges();
-      let end = fixture.debugElement.query(By.css('input[name=enddate]')).references['enddate'];
       end.validate();
       expect(end.valid).toBe(true);
     });
